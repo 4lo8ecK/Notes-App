@@ -1,6 +1,9 @@
 # A To-Do List app
 App saves data in files, every task is saved in each file. In the app start up app loads all this files and makes a list of tasks. User is able to create new task, edit or delete task also task is able to be marked as 'done'
-#       
-In future maybe will be created a multiuser version. I mean one user is not able to read other users' tasks, something like safety and one user can login as another user in the same PC and login in the app will be able to enter his profile
-#   
+In future maybe will be created a multiuser version. I mean one user is not able to read other users' tasks, something like safety and one user can login as another user in the same PC and login in the app will be able to enter his profile   
 This app will have both GUI and terminal versions. Terminal version is mostly will be used for testing the app but both will be able to be used (they will be different apps)
+
+# About me
+My name is Gavrilov Pavel, I'm just a student which started to learn programming not many time ago
+I create this project for CuvSU's "IT-ring"
+I hope I will win this year
