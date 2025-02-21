@@ -8,7 +8,7 @@ My name is Gavrilov Pavel, I'm just a student which started to learn programming
 I create this project for CuvSU's "IT-ring"
 I hope I will win this year
 
-#Why To-do list?
+# Why To-do list?
 At first I do it for my own use. Only after it - for "IT-ring".
 To-do list is one of the most easy apps for creating. In this app user data just is saving to files. Also, as I said earlier, I want GUI for it. This way I want to improve my skills.
 
