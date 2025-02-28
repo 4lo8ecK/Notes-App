@@ -9,7 +9,8 @@ namespace TaskSaver.Filework
     public class TaskWork : FileWork
     {
         public const string EXT = ".tsk";
-
+        
+        
 #if DEBUG
         public  string path = @"D:/tasks/";
 #else
@@ -36,7 +37,7 @@ namespace TaskSaver.Filework
 
         public string[] GetTasksList()
         {
-            return GetFilesList(path);
+            return GetFilesList(path, EXT);
         }
     }
 }

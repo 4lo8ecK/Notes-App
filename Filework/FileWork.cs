@@ -29,7 +29,7 @@ public class FileWork
         byte[] file_data = new UTF8Encoding(true).GetBytes(content);
         
         // clear file
-        file.SetLength(0);
+        //file.SetLength(0);
 
         // add text
         file.Write(file_data);
@@ -55,15 +55,22 @@ public class FileWork
         }
     }
 
-    public static string[] GetFilesList(string path)
+    public static string[] GetFilesList(string path, string extencion)
     {
         DirExist(path);
 
         string[] files = 
-                Directory.GetFiles(path)
+                Directory.GetFiles(path, "*"+extencion)
                 .Select(file => Path.GetFileNameWithoutExtension(file))
                 .ToArray();
 
-        return files;
+        string[] result = new string[files.Length];
+
+        for (int i = 0; i < files.Length; i++)
+        {
+            result[i] = files[files.Length - i - 1];
+        }
+
+        return result;
     }
 }
