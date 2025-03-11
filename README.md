@@ -9,6 +9,6 @@ I create this project for CuvSU's "IT-ring"
 I hope I will win this year
 
 ## Why Notes?
-At first I do it for my own use. Only after it - for "IT-ring".
+At first I do it for my own use. Only after it - for "IT-ring"of ChuvSU.
 To-do list is one of the most easy apps for creating. In this app user data just is saving to files. Also, as I said earlier, I want GUI for it. This way I want to improve my skills.
 
