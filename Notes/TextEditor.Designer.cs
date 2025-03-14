@@ -51,9 +51,9 @@
             NamePanel.BackColor = Color.White;
             NamePanel.Controls.Add(NameTextPanel);
             NamePanel.Controls.Add(label1);
-            NamePanel.Location = new Point(34, 8);
+            NamePanel.Location = new Point(12, 8);
             NamePanel.Name = "NamePanel";
-            NamePanel.Size = new Size(686, 78);
+            NamePanel.Size = new Size(730, 78);
             NamePanel.TabIndex = 0;
             NamePanel.SizeChanged += SizeChng;
             // 
@@ -64,7 +64,7 @@
             NameTextPanel.Controls.Add(NameBox);
             NameTextPanel.Location = new Point(24, 34);
             NameTextPanel.Name = "NameTextPanel";
-            NameTextPanel.Size = new Size(639, 34);
+            NameTextPanel.Size = new Size(683, 34);
             NameTextPanel.TabIndex = 0;
             NameTextPanel.TabStop = true;
             // 
@@ -76,7 +76,7 @@
             NameBox.Font = new Font("Segoe UI Variable Text Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             NameBox.Location = new Point(10, 6);
             NameBox.Name = "NameBox";
-            NameBox.Size = new Size(619, 22);
+            NameBox.Size = new Size(663, 22);
             NameBox.TabIndex = 1;
             NameBox.TextChanged += NameTextChanged;
             // 
@@ -96,9 +96,9 @@
             BodyPanel.BackColor = Color.White;
             BodyPanel.Controls.Add(BodyTextPanel);
             BodyPanel.Controls.Add(label2);
-            BodyPanel.Location = new Point(34, 92);
+            BodyPanel.Location = new Point(12, 92);
             BodyPanel.Name = "BodyPanel";
-            BodyPanel.Size = new Size(686, 311);
+            BodyPanel.Size = new Size(730, 311);
             BodyPanel.TabIndex = 0;
             BodyPanel.Resize += SizeChng;
             // 
@@ -109,7 +109,7 @@
             BodyTextPanel.Controls.Add(BodyBox);
             BodyTextPanel.Location = new Point(24, 31);
             BodyTextPanel.Name = "BodyTextPanel";
-            BodyTextPanel.Size = new Size(639, 268);
+            BodyTextPanel.Size = new Size(683, 268);
             BodyTextPanel.TabIndex = 1;
             // 
             // BodyBox
@@ -120,7 +120,7 @@
             BodyBox.Font = new Font("Segoe UI Variable Display Semib", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             BodyBox.Location = new Point(12, 8);
             BodyBox.Name = "BodyBox";
-            BodyBox.Size = new Size(616, 257);
+            BodyBox.Size = new Size(660, 257);
             BodyBox.TabIndex = 0;
             BodyBox.Text = "";
             // 
@@ -144,7 +144,7 @@
             SaveBtn.Font = new Font("Segoe UI Variable Text", 11F, FontStyle.Bold, GraphicsUnit.Point, 204);
             SaveBtn.ForeColor = SystemColors.ControlLightLight;
             SaveBtn.ImageAlign = ContentAlignment.TopCenter;
-            SaveBtn.Location = new Point(547, 412);
+            SaveBtn.Location = new Point(547, 413);
             SaveBtn.Name = "SaveBtn";
             SaveBtn.Size = new Size(115, 41);
             SaveBtn.TabIndex = 5;
@@ -162,7 +162,7 @@
             CancelBtn.Font = new Font("Segoe UI Variable Text", 11F, FontStyle.Bold, GraphicsUnit.Point, 204);
             CancelBtn.ForeColor = SystemColors.ActiveCaptionText;
             CancelBtn.ImageAlign = ContentAlignment.TopCenter;
-            CancelBtn.Location = new Point(426, 412);
+            CancelBtn.Location = new Point(426, 413);
             CancelBtn.Name = "CancelBtn";
             CancelBtn.Size = new Size(115, 41);
             CancelBtn.TabIndex = 5;

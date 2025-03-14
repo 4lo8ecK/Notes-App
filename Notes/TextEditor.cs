@@ -19,15 +19,40 @@ namespace TaskSaver
         string _name, _content;
         string new_name;
 
-        public TextEditor(string name, string content)
+        private bool Theme;
+        private bool Accented;
+        private int AccentColor;
+
+        public TextEditor(string name, string content, bool theme, bool accented, int accetnCol)
         {
+            Theme = theme;
+            Accented = accented;
+            AccentColor = accetnCol;
+
             _name = name;
             _content = content;
             InitializeComponent();
+            ChngTheme();
             RndAll();
             SetInputText();
         }
         
+        private void ChngTheme()
+        {
+            ThemeColorData th = new(Theme, Accented, AccentColor);
+            th.SetBackColor(this);
+            th.SetForeColor(NamePanel);
+            th.SetForeColor(BodyPanel);
+            th.SetLabelColor(label1);
+            th.SetLabelColor(label2);
+            th.SetTxtBoxColor(NameBox);
+            th.SetTxtBoxColor(BodyBox);
+            th.SetScndForeColor(BodyTextPanel);
+            th.SetScndForeColor(NameTextPanel);
+            th.SetBtnColor(SaveBtn, false);
+            th.SetBtnColor(CancelBtn, true);
+        }
+
         private void CancelClick(object sender, EventArgs e)
         {
             this.Close();
@@ -84,7 +109,7 @@ namespace TaskSaver
         private void RndAll()
         {
             formRnd(NamePanel, 25);
-            formRnd(NameTextPanel, 20);
+            formRnd(NameTextPanel, 15);
             formRnd(BodyPanel, 25);
             formRnd(BodyTextPanel, 20);
             formRnd(SaveBtn, 15);

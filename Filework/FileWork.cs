@@ -7,41 +7,64 @@ using static TaskManager.Encrypt;
 
 public class FileWork
 {
-    public static void DirExist(string path)
+    public static bool DirExist(string path)
     {
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
+            return true;
+        }
+        else if (Directory.Exists(path))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
-    public static void EditFile(string name, string content, string path)
+    public static bool EditFile(string name, string content, string path)
     {
         // check is dir exsist
         // if not -> creates dir
-        DirExist(path);
+        if (DirExist(path)&&File.Exists(path+"/"+name))
+        {
+            content = EncryptDat(content);
 
-        content = EncryptDat(content);
+            FileStream file = File.OpenWrite(path + "/" + name);
 
-        FileStream file = File.OpenWrite(path + name);
-        
-        // convert content to byte array to be able to save it into file
-        byte[] file_data = new UTF8Encoding(true).GetBytes(content);
-        
-        // clear file
-        //file.SetLength(0);
+            // convert content to byte array to be able to save it into file
+            byte[] file_data = new UTF8Encoding(true).GetBytes(content);
 
-        // add text
-        file.Write(file_data);
-        file.Close();
+            // clear file
+            //file.SetLength(0);
+
+            // add text
+            file.Write(file_data);
+            file.Close();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public static string ReadFile(string name, string path)
     {
         DirExist(path);
-        if (File.Exists(path + name))
+        if (File.Exists(path +"/"+ name))
         {
             return DecryptDat(File.ReadAllText(path + name));
+        }
+        return "Couldn't open the file";
+    }
+    public static string ReadFile(string name)
+    {
+        if (File.Exists(name))
+        {
+            return DecryptDat(File.ReadAllText(name));
         }
         return "Couldn't open the file";
     }

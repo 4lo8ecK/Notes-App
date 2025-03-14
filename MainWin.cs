@@ -1,27 +1,106 @@
 using System;
 using System.Windows.Forms;
-using System.Drawing;
-
 using static RoundBorder.Round;
-using static System.Net.Mime.MediaTypeNames;
-using System.Globalization;
 using TaskSaver.Properties;
 using TaskSaver.Notes;
-
+using static TaskSaver.ThemeColorData;
+using System.IO;
+using static FileWork;
+using static TaskSaver.Filework.TaskWork;
 
 namespace TaskSaver
 {
     public partial class MainWin : Form
     {
+        // true - light
+        // false - dark
+        public bool APP_THEME = true;
+        public bool ACCENTED = true;
+        public int APP_ACCENT_COLOR = 4;
+        public string PATH = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+"/Notes";
 
         public MainWin()
         {
             InitializeComponent();
-            RoundCorners();
+            GetDatFromDatFiles();
+            SetAppTheme();
             OpenDefaultTab();
+            
         }
 
-        public int startTabIndex = 0;
+        private void GetDatFromDatFiles()
+        {
+
+            APP_THEME = ReadThemeDatFromFile(themeDatFile);
+            ACCENTED = ReadThemeDatFromFile(accentColDatFile);
+            APP_ACCENT_COLOR = ReadAccentColorFromFile(accentColorFile);
+
+        }
+
+
+        string themeDatFile = "/th.dat";
+        string accentColDatFile = "/ac.dat";
+        string accentColorFile = "/acc.dat";
+
+        private void SaveThemeDatToFile(string name, bool data)
+        {
+            EditFile(name,data.ToString(), PATH);
+        }
+        private void SaveThemeDatToFile(string name, int data)
+        {
+            EditFile(name,data.ToString(), PATH);
+        }
+
+        private bool ReadThemeDatFromFile(string name)
+        {
+            string dat;
+            if (!File.Exists(PATH + name))
+            {
+                EditFile(name, true.ToString(),PATH);
+                return true;
+            }
+            else
+            {
+                dat = ReadFile(name, PATH);
+                return Convert.ToBoolean(dat);
+                
+            }
+        }
+        private int ReadAccentColorFromFile(string name)
+        {
+            string dat;
+            if (!File.Exists(PATH + name))
+            {
+                EditFile(name, true.ToString(), PATH);
+                return 0;
+            }
+            else
+            {
+                dat = ReadFile(name, PATH);
+                return Convert.ToInt16(dat);
+                
+            }
+        }
+
+        public void SetAppTheme()
+        {
+            SuspendLayout();
+            SaveThemeDatToFile(themeDatFile, APP_THEME);
+            SaveThemeDatToFile(accentColDatFile, ACCENTED);
+            SaveThemeDatToFile(accentColorFile, APP_ACCENT_COLOR);
+
+            ThemeColorData th = new(APP_THEME, ACCENTED, APP_ACCENT_COLOR);
+            th.SetBackColor(this);
+            th.SetBackColor(ToolsPanel);
+            th.SetScndForeColor(Sidebar);
+            th.SetBtnColor(MenuBtn, true);
+            th.SetBtnColor(NotesBtn, true);
+            th.SetBtnColor(SettingsBtn, true);
+            ResumeLayout();
+        }
+
+
+        public int startTabIndex = 1;
         public string[] TabsNames =
         {
             "Настройки",    //  0
@@ -39,33 +118,23 @@ namespace TaskSaver
                 case 1:
                     OpenNotesManager();
                     break;
-                case 2:
-                    OpenCalendar();
-                    break;
             }
         }
 
         private void OpenNotesManager()
         {
-            TasksManager manager = new();
+            TasksManager manager = new(this);
             manager.Dock = DockStyle.Fill;
 
             ToolsPanel.Controls.Clear();
             ToolsPanel.Controls.Add(manager);
         }
 
-        private void OpenCalendar()
-        {
-            CalendarPanel calend = new();
-            calend.Dock = DockStyle.Fill;
 
-            ToolsPanel.Controls.Clear();
-            ToolsPanel.Controls.Add(calend);
-        }
 
-        private void OpenSettings() 
+        private void OpenSettings()
         {
-            Settings settings = new();
+            Settings settings = new(this);
             settings.Dock = DockStyle.Fill;
 
             ToolsPanel.Controls.Clear();
@@ -75,44 +144,27 @@ namespace TaskSaver
 
 
         private bool SideBarOpened = false;
-        private void Open_Close_SideBar()
-        {
-            if (SideBarOpened)
-            {
-                Sidebar.Width = 42;
-                MenuBtn.BackColor = SystemColors.InactiveBorder;
-                SideBarOpened = false;
-            }
-            else
-            {
-                MenuBtn.BackColor = SystemColors.ControlLight;
-                Sidebar.Width = 250;
-                SideBarOpened = true;
-            }
-        }
+        System.Drawing.Point DefToolPanelLoc = new System.Drawing.Point(75, 5);
 
-
-        Point DefToolPanelLoc = new Point(75, 5);
-        
         private void CloseSidebar()
         {
             Sidebar.Width = 42;
-            MenuBtn.BackColor = SystemColors.InactiveBorder;
-            
-            ToolsPanel.Location = new Point(DefToolPanelLoc.X, DefToolPanelLoc.Y);
+            //MenuBtn.BackColor = SystemColors.InactiveBorder;
+
+            ToolsPanel.Location = new System.Drawing.Point(DefToolPanelLoc.X, DefToolPanelLoc.Y);
             ToolsPanel.Width = this.Width - 100;
 
             SideBarOpened = false;
-            ToolsPanel.Location = new Point(DefToolPanelLoc.X, DefToolPanelLoc.Y);
+            ToolsPanel.Location = new System.Drawing.Point(DefToolPanelLoc.X, DefToolPanelLoc.Y);
 
         }
-        
+
         private void OpenSidebar()
         {
             Sidebar.Width = 250;
-            MenuBtn.BackColor = SystemColors.InactiveBorder;
-            
-            ToolsPanel.Location = new Point(DefToolPanelLoc.X + 200, DefToolPanelLoc.Y);
+            //MenuBtn.BackColor = SystemColors.InactiveBorder;
+
+            ToolsPanel.Location = new System.Drawing.Point(DefToolPanelLoc.X + 200, DefToolPanelLoc.Y);
             ToolsPanel.Width -= 200;
 
             SideBarOpened = true;
@@ -120,21 +172,21 @@ namespace TaskSaver
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            
-            RoundCorners();
+            //SuspendLayout();
             if (WindowState == FormWindowState.Maximized)
             {
                 OpenSidebar();
             }
-            if (WindowState == FormWindowState.Normal)
+            else if (WindowState == FormWindowState.Normal)
             {
                 CloseSidebar();
-                
+
             }
+            //ResumeLayout();
 
         }
 
-        
+
 
 
         private void Notes_click(object sender, EventArgs e)
@@ -148,20 +200,6 @@ namespace TaskSaver
             if (WindowState == FormWindowState.Normal)
             {
                 OpenNotesManager();
-                CloseSidebar();
-            }
-        }
-        private void Calend_click(object sender, EventArgs e)
-        {
-            if (WindowState == FormWindowState.Maximized)
-            {
-                ToolsPanel.Controls.Clear();
-                OpenCalendar();
-
-            }
-            if (WindowState == FormWindowState.Normal)
-            {
-                OpenCalendar();
                 CloseSidebar();
             }
         }
@@ -195,14 +233,14 @@ namespace TaskSaver
             }
         }
 
-        private void RoundCorners()
-        {
-            //formRnd(LeftToolPanel, 30);
-        }
-
         private void MainWin_MaximizedBoundsChanged(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void Sidebar_Leave(object sender, EventArgs e)
+        {
+            //CloseSidebar();
         }
     }
 }

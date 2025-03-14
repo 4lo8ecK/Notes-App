@@ -31,8 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWin));
             Sidebar = new Panel();
             SettingsBtn = new Button();
-            CalendarOpenBtn = new Button();
-            NotesOpenBtn = new Button();
+            NotesBtn = new Button();
             MenuBtn = new Button();
             ToolsPanel = new Panel();
             Sidebar.SuspendLayout();
@@ -42,8 +41,7 @@
             // 
             Sidebar.BackColor = SystemColors.InactiveBorder;
             Sidebar.Controls.Add(SettingsBtn);
-            Sidebar.Controls.Add(CalendarOpenBtn);
-            Sidebar.Controls.Add(NotesOpenBtn);
+            Sidebar.Controls.Add(NotesBtn);
             Sidebar.Controls.Add(MenuBtn);
             Sidebar.Dock = DockStyle.Left;
             Sidebar.Font = new Font("Microsoft Sans Serif", 8.25F);
@@ -51,19 +49,20 @@
             Sidebar.Name = "Sidebar";
             Sidebar.Size = new Size(42, 561);
             Sidebar.TabIndex = 0;
+            Sidebar.Leave += Sidebar_Leave;
             // 
             // SettingsBtn
             // 
             SettingsBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            SettingsBtn.BackColor = SystemColors.InactiveBorder;
+            SettingsBtn.BackColor = Color.Transparent;
             SettingsBtn.BackgroundImageLayout = ImageLayout.Zoom;
             SettingsBtn.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 0);
             SettingsBtn.FlatAppearance.BorderSize = 0;
             SettingsBtn.FlatStyle = FlatStyle.Flat;
             SettingsBtn.Font = new Font("Segoe UI Variable Display Semib", 11F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            SettingsBtn.Image = (Image)resources.GetObject("SettingsBtn.Image");
+            SettingsBtn.Image = Properties.Resources.settings_32;
             SettingsBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            SettingsBtn.Location = new Point(0, 511);
+            SettingsBtn.Location = new Point(0, 527);
             SettingsBtn.Name = "SettingsBtn";
             SettingsBtn.Size = new Size(250, 32);
             SettingsBtn.TabIndex = 0;
@@ -71,51 +70,33 @@
             SettingsBtn.UseVisualStyleBackColor = false;
             SettingsBtn.Click += Settings_click;
             // 
-            // CalendarOpenBtn
+            // NotesBtn
             // 
-            CalendarOpenBtn.BackColor = SystemColors.InactiveBorder;
-            CalendarOpenBtn.BackgroundImageLayout = ImageLayout.Zoom;
-            CalendarOpenBtn.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 0);
-            CalendarOpenBtn.FlatAppearance.BorderSize = 0;
-            CalendarOpenBtn.FlatStyle = FlatStyle.Flat;
-            CalendarOpenBtn.Font = new Font("Segoe UI Variable Display Semib", 11F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            CalendarOpenBtn.Image = (Image)resources.GetObject("CalendarOpenBtn.Image");
-            CalendarOpenBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            CalendarOpenBtn.Location = new Point(0, 118);
-            CalendarOpenBtn.Name = "CalendarOpenBtn";
-            CalendarOpenBtn.Size = new Size(250, 32);
-            CalendarOpenBtn.TabIndex = 0;
-            CalendarOpenBtn.Text = "Календарь";
-            CalendarOpenBtn.UseVisualStyleBackColor = false;
-            CalendarOpenBtn.Click += Calend_click;
-            // 
-            // NotesOpenBtn
-            // 
-            NotesOpenBtn.BackColor = SystemColors.InactiveBorder;
-            NotesOpenBtn.BackgroundImageLayout = ImageLayout.Zoom;
-            NotesOpenBtn.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 0);
-            NotesOpenBtn.FlatAppearance.BorderSize = 0;
-            NotesOpenBtn.FlatStyle = FlatStyle.Flat;
-            NotesOpenBtn.Font = new Font("Segoe UI Variable Display Semib", 11F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            NotesOpenBtn.Image = (Image)resources.GetObject("NotesOpenBtn.Image");
-            NotesOpenBtn.ImageAlign = ContentAlignment.MiddleLeft;
-            NotesOpenBtn.Location = new Point(0, 80);
-            NotesOpenBtn.Name = "NotesOpenBtn";
-            NotesOpenBtn.Size = new Size(250, 32);
-            NotesOpenBtn.TabIndex = 0;
-            NotesOpenBtn.Text = "Заметки";
-            NotesOpenBtn.UseVisualStyleBackColor = false;
-            NotesOpenBtn.Click += Notes_click;
+            NotesBtn.BackColor = Color.Transparent;
+            NotesBtn.BackgroundImageLayout = ImageLayout.Zoom;
+            NotesBtn.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 0);
+            NotesBtn.FlatAppearance.BorderSize = 0;
+            NotesBtn.FlatStyle = FlatStyle.Flat;
+            NotesBtn.Font = new Font("Segoe UI Variable Display Semib", 11F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            NotesBtn.Image = Properties.Resources.main_icon_32;
+            NotesBtn.ImageAlign = ContentAlignment.MiddleLeft;
+            NotesBtn.Location = new Point(0, 58);
+            NotesBtn.Name = "NotesBtn";
+            NotesBtn.Size = new Size(250, 32);
+            NotesBtn.TabIndex = 0;
+            NotesBtn.Text = "Заметки";
+            NotesBtn.UseVisualStyleBackColor = false;
+            NotesBtn.Click += Notes_click;
             // 
             // MenuBtn
             // 
-            MenuBtn.BackColor = SystemColors.InactiveBorder;
+            MenuBtn.BackColor = Color.Transparent;
             MenuBtn.BackgroundImageLayout = ImageLayout.Zoom;
             MenuBtn.FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 0);
             MenuBtn.FlatAppearance.BorderSize = 0;
             MenuBtn.FlatStyle = FlatStyle.Flat;
             MenuBtn.Font = new Font("Segoe UI Variable Small", 14F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            MenuBtn.Image = Properties.Resources.main_icon_32;
+            MenuBtn.Image = Properties.Resources.menu_32;
             MenuBtn.ImageAlign = ContentAlignment.MiddleLeft;
             MenuBtn.Location = new Point(0, 0);
             MenuBtn.Name = "MenuBtn";
@@ -145,7 +126,7 @@
             MinimumSize = new Size(750, 500);
             Name = "MainWin";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Самое удобное приложение";
+            Text = "Заметки";
             Resize += Form1_SizeChanged;
             Sidebar.ResumeLayout(false);
             ResumeLayout(false);
@@ -155,8 +136,7 @@
         private Panel Sidebar;
         private Panel ToolsPanel;
         private Button MenuBtn;
-        private Button NotesOpenBtn;
-        private Button CalendarOpenBtn;
+        private Button NotesBtn;
         private Button SettingsBtn;
     }
 }

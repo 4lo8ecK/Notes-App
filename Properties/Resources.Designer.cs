@@ -63,6 +63,26 @@ namespace TaskSaver.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap calendar_32 {
+            get {
+                object obj = ResourceManager.GetObject("calendar 32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap calendar_icon_128 {
+            get {
+                object obj = ResourceManager.GetObject("calendar icon 128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap close_def {
             get {
                 object obj = ResourceManager.GetObject("close_def", resourceCulture);
@@ -173,6 +193,26 @@ namespace TaskSaver.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap menu {
+            get {
+                object obj = ResourceManager.GetObject("menu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_32 {
+            get {
+                object obj = ResourceManager.GetObject("menu 32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap min_def {
             get {
                 object obj = ResourceManager.GetObject("min_def", resourceCulture);
@@ -203,9 +243,19 @@ namespace TaskSaver.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap save_task_lowres {
+        internal static System.Drawing.Bitmap settings_128 {
             get {
-                object obj = ResourceManager.GetObject("save_task_lowres", resourceCulture);
+                object obj = ResourceManager.GetObject("settings 128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap settings_32 {
+            get {
+                object obj = ResourceManager.GetObject("settings 32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

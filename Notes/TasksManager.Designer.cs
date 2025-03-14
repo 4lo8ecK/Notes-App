@@ -85,6 +85,7 @@
             TaskTextBox.TabIndex = 8;
             TaskTextBox.Text = "Введите текст";
             TaskTextBox.Enter += TaskTextBox_Click;
+            TaskTextBox.KeyDown += TaskTextBox_KeyDown;
             TaskTextBox.Leave += TaskTextBox_Leave;
             // 
             // TasksLbl
@@ -127,14 +128,14 @@
             // 
             // TasksManager
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            BackColor = Color.Transparent;
             Controls.Add(tasksContasiner);
             Controls.Add(MainPanel);
             Name = "TasksManager";
             Size = new Size(650, 500);
-            SizeChanged += TasksManager_SizeChanged;
+            Resize += TasksManager_SizeChanged;
             MainPanel.ResumeLayout(false);
             TextBoxCorn.ResumeLayout(false);
             TextBoxCorn.PerformLayout();

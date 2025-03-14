@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Forms;
 
 using static TaskSaver.Filework.TaskWork;
@@ -11,37 +12,59 @@ namespace TaskSaver
 {
     public partial class TaskPanel : UserControl
     {
+        private bool AppTheme;
+        private bool Accented;
+        private int AccentColor;
+
         private FlowLayoutPanel parentPanel;
         private SizeChangedInfo parent;
         private string TaskName;
 
-        public TaskPanel(string taskname, 
-            FlowLayoutPanel prntPnl, int wid)
+        TasksManager MGR;
+
+        public TaskPanel(string taskname, TasksManager mgr,
+            FlowLayoutPanel prntPnl, int wid, bool _Theme, bool accented, int accentColor)
         {
+            MGR = mgr;
+            AccentColor = accentColor;
+            this.DoubleBuffered = true;
+
+            AppTheme = _Theme;
+            Accented = accented;
+
             parentPanel = prntPnl;
             InitializeComponent();
             this.Width = wid - 35;
-
+            ChngTheme();
 
             TaskNameLbl.Text = taskname;
             TaskName = taskname;
             RndCrnr();
 
             parentPanel.SizeChanged += new EventHandler(ParentSizeChng);
-
+            Accented = accented;
+            AccentColor = accentColor;
         }
 
+        private void ChngTheme()
+        {
+
+            ThemeColorData th = new(AppTheme, Accented, AccentColor);
+            th.SetScndForeColor(this);
+            th.SetLabelColor(TaskNameLbl);
+        }
+        
         private void ParentSizeChng(object sender, EventArgs e)
         {
             CopyParentSize();
             RndCrnr();
         }
-
+        
         private void CopyParentSize()
         {
             this.Width = parentPanel.Width - 35;
         }
-
+        
         private void RndCrnr()
         {
             formRnd(this, 25);
@@ -51,9 +74,8 @@ namespace TaskSaver
         
         private void Delete()
         {
-            TasksManager mg = new();
             tsk.DeleteTask(TaskName);
-            mg.LoadTaskPanels();
+            MGR.LoadTaskPanels();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,7 +86,7 @@ namespace TaskSaver
         private bool editor_is_already_opened = false;
         private void openTextEditor()
         {
-            TextEditor editor = new(TaskName, tsk.ReadTask(TaskName));
+            TextEditor editor = new(TaskName, tsk.ReadTask(TaskName), AppTheme, Accented, AccentColor);
             if (!editor_is_already_opened)
             {
                 editor.FormClosed += new FormClosedEventHandler(this.TextEditorClosedAction);
@@ -80,8 +102,7 @@ namespace TaskSaver
 
         private void TextEditorClosedAction(object sender, FormClosedEventArgs e)
         {
-            TasksManager mg = new();
-            mg.LoadTaskPanels();
+            MGR.LoadTaskPanels();
             editor_is_already_opened = false;
         }
 

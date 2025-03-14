@@ -37,7 +37,8 @@
             // 
             TaskNameLbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TaskNameLbl.AutoEllipsis = true;
-            TaskNameLbl.Font = new Font("Segoe UI Variable Small Semibol", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            TaskNameLbl.BackColor = Color.Transparent;
+            TaskNameLbl.Font = new Font("Segoe UI Variable Small Semibol", 16F, FontStyle.Bold, GraphicsUnit.Point, 204);
             TaskNameLbl.ImageAlign = ContentAlignment.MiddleLeft;
             TaskNameLbl.Location = new Point(45, 8);
             TaskNameLbl.Name = "TaskNameLbl";
@@ -56,6 +57,7 @@
             Panel_Icon.Name = "Panel_Icon";
             Panel_Icon.Size = new Size(35, 35);
             Panel_Icon.TabIndex = 1;
+            Panel_Icon.Visible = false;
             // 
             // delBtn
             // 

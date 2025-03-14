@@ -16,14 +16,48 @@ namespace TaskSaver
 {
     public partial class TasksManager : UserControl
     {
-        public TasksManager()
+        public bool AppTheme;
+        public bool Accented;
+        public int AccentColor;
+
+        public TasksManager(MainWin mw)
         {
+            this.DoubleBuffered = true;
+            
+            AppTheme = mw.APP_THEME;
+            Accented = mw.ACCENTED;
+            AccentColor = mw.APP_ACCENT_COLOR;
+
             InitializeComponent();
             RoundCorners();
             LoadTaskPanels();
             TextBoxSetDefault();
             CurDateLblContent();
+            ChngTheme(AppTheme);
+
         }
+        public TasksManager()
+        {
+
+            InitializeComponent();
+            RoundCorners();
+            LoadTaskPanels();
+            TextBoxSetDefault();
+            CurDateLblContent();
+
+        }
+
+        public void ChngTheme(bool input)
+        {
+            ThemeColorData th = new ThemeColorData(AppTheme, Accented, AccentColor);
+
+            th.SetForeColor(MainPanel);
+            th.SetLabelColor(TasksLbl);
+            th.SetTxtBoxColor(TaskTextBox);
+            th.SetScndForeColor(TextBoxCorn);
+            th.SetBtnColor(newTaskBtn, false);
+        }
+
         public void RoundCorners()
         {
             formRnd(newTaskBtn, 15);
@@ -46,7 +80,7 @@ namespace TaskSaver
             for (int i = 0; i < TasksList.Length; i++)
             {
                 tasksContasiner.SizeChanged += new EventHandler(this.TasksManager_SizeChanged);
-                TaskPanel tskPanel = new TaskPanel(TasksList[i], tasksContasiner, tasksContasiner.Width);
+                TaskPanel tskPanel = new TaskPanel(TasksList[i], this, tasksContasiner, tasksContasiner.Width, AppTheme, Accented, AccentColor);
                 tskPanel.Name = TasksList[i];
                 tasksContasiner.Controls.Add(tskPanel);
             }
@@ -54,19 +88,17 @@ namespace TaskSaver
 
 
         const string TextBoxDefaultText = "Новая заметка";
-        Color DefaultTextColor = SystemColors.GrayText;
         private void TextBoxSetDefault()
         {
             TaskTextBox.Text = TextBoxDefaultText;
-            TaskTextBox.ForeColor = DefaultTextColor;
         }
 
         const string TextBoxEditText = "";
         Color EditTextColor = System.Drawing.SystemColors.WindowText;
         private void TextBoxSetEditMode()
         {
+
             TaskTextBox.Text = TextBoxEditText;
-            TaskTextBox.ForeColor = EditTextColor;
         }
         private void TaskTextBox_Click(object sender, EventArgs e)
         {
@@ -94,7 +126,10 @@ namespace TaskSaver
 
         private void TasksManager_SizeChanged(object sender, EventArgs e)
         {
+            SuspendLayout();
             RoundCorners();
+            ResumeLayout();
+
         }
 
         private void NewTaskBtn(object sender, EventArgs e)
@@ -107,11 +142,11 @@ namespace TaskSaver
             }
             else
             {
-                TextEditor editor = new("", "");
+                TextEditor editor = new("", "", AppTheme, Accented, AccentColor);
                 editor.FormClosed += new FormClosedEventHandler(this.TxtEditorClosed);
                 editor.Show();
             }
-            
+
         }
 
         public void TxtEditorClosed(object sender, FormClosedEventArgs e)
@@ -121,7 +156,20 @@ namespace TaskSaver
 
         private void TaskTextBox_Leave(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void TaskTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Escape)
+            {
+                TextBoxSetDefault();
+                TaskTextBox.Focus();
+            }
+            if(e.KeyCode == Keys.Enter)
+            {
+                SaveNewTask();
+            }
         }
     }
 }
