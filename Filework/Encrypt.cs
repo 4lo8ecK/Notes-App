@@ -10,7 +10,7 @@ namespace TaskManager
 {
     public static class Encrypt
     {
-        private const string KEY = "Hikemi dies in the end of 'Order 66'";
+        private const string KEY = ""; // add you own text
         // 'Order 66' is my short film inspiered of Star Wars
         // Hikemi is main character in it.
 
