@@ -3,6 +3,9 @@ App saves data in files, every task is saved in each file. In the app start up a
 In future maybe will be created a multiuser version. I mean one user is not able to read other users' tasks, something like safety and one user can login as another user in the same PC and login in the app will be able to enter his profile   
 This app will have both GUI and terminal versions. Terminal version mostly will be used for testing the app but both will be able to be used as well (they will be different apps)
 
+## Before make own build
+**Set your own key** before building in `private const string KEY = "your KEY";` in `Filework/Encrypt.cs`
+
 ## About me
 My name is Gavrilov Pavel, I'm just a student which started to learn programming not many time ago
 I create this project for CuvSU's "IT-ring"
