@@ -28,7 +28,7 @@ public class FileWork
     {
         // check is dir exsist
         // if not -> creates dir
-        if (DirExist(path)&&File.Exists(path+"/"+name))
+        if (DirExist(path))
         {
             content = EncryptDat(content);
 
